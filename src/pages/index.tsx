@@ -1,5 +1,5 @@
 import { Inter } from '@next/font/google';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import SearchBar from '../components/ui/SearchBar';
 import { DataContext } from '../contexts/ApiDataContext';
 import { SearchContext } from '../contexts/searchcontext';
@@ -9,6 +9,10 @@ const inter = Inter({ subsets: ['latin'] });
 
 export interface IHome {
   res?: object;
+}
+
+interface CityName {
+  cityName: string;
 }
 
 interface IResults {
@@ -32,6 +36,8 @@ const Home = ({ res }: IHome) => {
   const { data, setData } = useContext(DataContext);
   const [results, setResults] = useState<IResults[]>([]);
 
+  const [cityName, setCityName] = useState<string | undefined>();
+
   const fetchSearchResults = async () => {
     const initialState = '';
     if (searchText) {
@@ -40,28 +46,31 @@ const Home = ({ res }: IHome) => {
     }
   };
 
-  const fetchWeatherData = async () => {
-    const location = 'london';
-    if (searchText) {
-      const res = await weatherData.get(
-        `${searchText}&days=3&aqi=yes&alerts=yes`
-      );
-      setData(res.data);
-    } else {
-      setData(res);
-    }
-  };
+  useEffect(() => {
+    const fetchWeatherData = async () => {
+      const location = 'london';
+      if (cityName) {
+        const res = await weatherData.get(
+          `${cityName}&days=3&aqi=yes&alerts=yes`
+        );
+        setData(res.data);
+      } else {
+        setData(res);
+      }
+    };
+    fetchWeatherData();
+  }, [cityName, setData, res]);
 
-  console.log(results);
+  console.log(data);
 
   return (
     <div>
       <SearchBar />
       <button onClick={fetchSearchResults}>Search</button>
       {results.map((result) => (
-        <div key={result.id}>
+        <button key={result.id} onClick={() => setCityName(result.name)}>
           {result.name} : {result.region}
-        </div>
+        </button>
       ))}
     </div>
   );
