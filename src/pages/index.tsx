@@ -1,18 +1,24 @@
 import { Inter } from '@next/font/google';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import SearchBar from '../components/ui/SearchBar';
 import { DataContext } from '../contexts/ApiDataContext';
 import { SearchContext } from '../contexts/searchcontext';
-import api from './api/axios';
+import { searchData, weatherData } from './api/axios';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export interface IHome {
-  res?: {};
+  res?: object;
+}
+
+interface IResults {
+  id: number;
+  name: string;
+  region: string;
 }
 
 export const getServerSideProps = async () => {
-  const res = await api.get('tokyo&days=3&aqi=yes&alerts=yes');
+  const res = await weatherData.get('tokyo&days=3&aqi=yes&alerts=yes');
 
   return {
     props: {
@@ -24,24 +30,39 @@ export const getServerSideProps = async () => {
 const Home = ({ res }: IHome) => {
   const { searchText } = useContext(SearchContext);
   const { data, setData } = useContext(DataContext);
+  const [results, setResults] = useState<IResults[]>([]);
 
-  const fetchAPI = async () => {
-    const location = 'london';
+  const fetchSearchResults = async () => {
+    const initialState = '';
     if (searchText) {
-      const res = await api.get(`${searchText}&days=3&aqi=yes&alerts=yes`);
-      setData(res.data);
-    } else {
-      const res = await api.get(`${location}&days=3&aqi=yes&alerts=yes`);
-      setData(res.data);
+      const searchRes = await searchData.get(searchText);
+      setResults(searchRes.data);
     }
   };
 
-  console.log(data);
+  const fetchWeatherData = async () => {
+    const location = 'london';
+    if (searchText) {
+      const res = await weatherData.get(
+        `${searchText}&days=3&aqi=yes&alerts=yes`
+      );
+      setData(res.data);
+    } else {
+      setData(res);
+    }
+  };
+
+  console.log(results);
 
   return (
     <div>
       <SearchBar />
-      <button onClick={fetchAPI}>Search</button>
+      <button onClick={fetchSearchResults}>Search</button>
+      {results.map((result) => (
+        <div key={result.id}>
+          {result.name} : {result.region}
+        </div>
+      ))}
     </div>
   );
 };
