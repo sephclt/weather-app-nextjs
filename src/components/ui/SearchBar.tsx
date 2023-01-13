@@ -6,7 +6,12 @@ const SearchBar = () => {
 
   return (
     <div>
-      <input type="text" onChange={(e) => setSearchText(e.target.value)} />
+      <input
+        type="text"
+        onChange={
+          setSearchText ? (e) => setSearchText(e.target.value) : undefined
+        }
+      />
     </div>
   );
 };

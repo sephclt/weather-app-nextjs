@@ -12,7 +12,7 @@ export interface IDataContext {
 }
 
 export interface ISearchContext {
-  searchText: string;
+  searchText?: string;
   setSearchText?: React.Dispatch<React.SetStateAction<string>>;
 }
 
