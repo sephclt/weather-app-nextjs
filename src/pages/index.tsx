@@ -1,25 +1,13 @@
 import { Inter } from '@next/font/google';
 import { useContext, useEffect, useState } from 'react';
 import SearchBar from '../components/ui/SearchBar';
-import { DataContext } from '../contexts/ApiDataContext';
 import { SearchContext } from '../contexts/searchcontext';
-import { searchData, weatherData } from './api/axios';
+import useFetch from '../hooks/useFetch';
+import useFetchResults from '../hooks/useFetchResults';
+import { IHome, IResults } from '../interfaces/DataInterface';
+import { weatherData } from './api/axios';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export interface IHome {
-  res?: object;
-}
-
-interface CityName {
-  cityName: string;
-}
-
-interface IResults {
-  id: number;
-  name: string;
-  region: string;
-}
 
 export const getServerSideProps = async () => {
   const res = await weatherData.get('tokyo&days=3&aqi=yes&alerts=yes');
@@ -33,35 +21,19 @@ export const getServerSideProps = async () => {
 
 const Home = ({ res }: IHome) => {
   const { searchText } = useContext(SearchContext);
-  const { data, setData } = useContext(DataContext);
+  const [weatherData, setWeatherData] = useState<
+    { location: { name: string } }[]
+  >([res]);
   const [results, setResults] = useState<IResults[]>([]);
+  const [cityName, setCityName] = useState<string>('');
 
-  const [cityName, setCityName] = useState<string | undefined>();
-
-  const fetchSearchResults = async () => {
-    const initialState = '';
-    if (searchText) {
-      const searchRes = await searchData.get(searchText);
-      setResults(searchRes.data);
-    }
-  };
+  const { handleFetchData } = useFetch({ setWeatherData, cityName });
+  const { textResult, fetchSearchResults } = useFetchResults({ searchText });
 
   useEffect(() => {
-    const fetchWeatherData = async () => {
-      const location = 'london';
-      if (cityName) {
-        const res = await weatherData.get(
-          `${cityName}&days=3&aqi=yes&alerts=yes`
-        );
-        setData(res.data);
-      } else {
-        setData(res);
-      }
-    };
-    fetchWeatherData();
-  }, [cityName, setData, res]);
-
-  console.log(data);
+    handleFetchData();
+    setResults(textResult);
+  }, [handleFetchData, textResult]);
 
   return (
     <div>
@@ -72,6 +44,11 @@ const Home = ({ res }: IHome) => {
           {result.name} : {result.region}
         </button>
       ))}
+      <div>
+        {weatherData.map((data, index) => (
+          <p key={index}>{data.location.name}</p>
+        ))}
+      </div>
     </div>
   );
 };
