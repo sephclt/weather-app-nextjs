@@ -10,6 +10,7 @@ import CardContainer from '../components/containers/CardContainer';
 import HeaderContainer from '../components/containers/HeaderContainer';
 import MainWrapper from '../components/containers/MainWrapper';
 import MainLayout from '../components/layouts/MainLayout';
+import Button from '../components/ui/Button';
 
 export const getServerSideProps = async () => {
   const res = await weatherData.get('tokyo&days=3&aqi=yes&alerts=yes');
@@ -41,7 +42,13 @@ const Home = ({ res }: IHome) => {
     <MainLayout>
       <MainWrapper>
         <HeaderContainer>
-          <SearchBar />
+          <h1 className="text-5xl font-bold">LOGO</h1>
+          <div className="flex gap-1">
+            <SearchBar />
+            <Button>
+              <i className="fa-solid fa-magnifying-glass-location fa-xl"></i>
+            </Button>
+          </div>
         </HeaderContainer>
         <button onClick={fetchSearchResults}>Search</button>
         {results.map((result) => (
