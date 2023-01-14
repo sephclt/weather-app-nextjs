@@ -1,4 +1,3 @@
-import { Inter } from '@next/font/google';
 import { useContext, useEffect, useState } from 'react';
 import SearchBar from '../components/ui/SearchBar';
 import { SearchContext } from '../contexts/searchcontext';
@@ -7,7 +6,10 @@ import useFetchResults from '../hooks/useFetchResults';
 import { IHome, IResults } from '../interfaces/DataInterface';
 import { weatherData } from './api/axios';
 
-const inter = Inter({ subsets: ['latin'] });
+import CardContainer from '../components/containers/CardContainer';
+import HeaderContainer from '../components/containers/HeaderContainer';
+import MainWrapper from '../components/containers/MainWrapper';
+import MainLayout from '../components/layouts/MainLayout';
 
 export const getServerSideProps = async () => {
   const res = await weatherData.get('tokyo&days=3&aqi=yes&alerts=yes');
@@ -36,20 +38,26 @@ const Home = ({ res }: IHome) => {
   }, [handleFetchData, textResult]);
 
   return (
-    <div>
-      <SearchBar />
-      <button onClick={fetchSearchResults}>Search</button>
-      {results.map((result) => (
-        <button key={result.id} onClick={() => setCityName(result.name)}>
-          {result.name} : {result.region}
-        </button>
-      ))}
-      <div>
-        {weatherData.map((data, index) => (
-          <p key={index}>{data.location.name}</p>
+    <MainLayout>
+      <MainWrapper>
+        <HeaderContainer>
+          <SearchBar />
+        </HeaderContainer>
+        <button onClick={fetchSearchResults}>Search</button>
+        {results.map((result) => (
+          <button key={result.id} onClick={() => setCityName(result.name)}>
+            {result.name} : {result.region}
+          </button>
         ))}
-      </div>
-    </div>
+        <CardContainer>
+          <div>
+            {weatherData.map((data, index) => (
+              <p key={index}>{data.location.name}</p>
+            ))}
+          </div>
+        </CardContainer>
+      </MainWrapper>
+    </MainLayout>
   );
 };
 
