@@ -1,19 +1,15 @@
-import { useContext } from 'react';
-import { SearchContext } from '../../contexts/searchcontext';
+import { useState } from 'react';
 
-const SearchBar = () => {
-  const { setSearchText } = useContext(SearchContext);
+interface ISearchBarProps {
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+}
 
+const SearchBar = ({ setSearchText }: ISearchBarProps) => {
+  const [inputText, setInputText] = useState<string>('');
   return (
     <>
-      <input
-        className="w-[48rem] h-auto rounded-xl px-5 py-4 text-black outline-none"
-        type="text"
-        placeholder="Search Location ..."
-        onChange={
-          setSearchText ? (e) => setSearchText(e.target.value) : undefined
-        }
-      />
+      <input type="text" onChange={(e) => setInputText(e.target.value)} />
+      <button onClick={() => setSearchText(inputText)}>Click Me!</button>
     </>
   );
 };
