@@ -19,8 +19,6 @@ const useDataFetch = (cityName: string) => {
     handleFetchData();
   }, [handleFetchData]);
 
-  console.log(weatherData);
-
   return weatherData;
 };
 
