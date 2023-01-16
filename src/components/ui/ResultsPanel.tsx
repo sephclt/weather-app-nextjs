@@ -17,7 +17,7 @@ const ResultsPanel = ({
   setCityList,
 }: IResultsPanelProps) => {
   return (
-    <div>
+    <>
       {cityList.map((city) => (
         <button
           key={city.id}
@@ -28,7 +28,7 @@ const ResultsPanel = ({
           {city.name}
         </button>
       ))}
-    </div>
+    </>
   );
 };
 

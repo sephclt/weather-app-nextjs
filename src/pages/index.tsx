@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import HeaderContainer from '../components/containers/HeaderContainer';
 import ResultsPanel from '../components/ui/ResultsPanel';
 import SearchBar from '../components/ui/SearchBar';
 
@@ -16,17 +17,19 @@ const App = () => {
 
   return (
     <div style={{ color: 'black' }}>
-      <div>
-        <p>{cityName}</p>
-      </div>
-      <SearchBar setSearchText={setSearchText} />
-      <div className="flex flex-dir justify-center items-center">
-        <ResultsPanel
-          cityList={cityList}
-          setCityName={setCityName}
-          setCityList={setCityList}
-        />
-      </div>
+      <HeaderContainer>
+        <h1 className="text-4xl font-bold">Weather App</h1>
+        <div className="relative">
+          <SearchBar setSearchText={setSearchText} />
+          <div className="absolute top-[57px] left-0 right-0 bg-white flex flex-col justify-center items-center">
+            <ResultsPanel
+              cityList={cityList}
+              setCityName={setCityName}
+              setCityList={setCityList}
+            />
+          </div>
+        </div>
+      </HeaderContainer>
     </div>
   );
 };

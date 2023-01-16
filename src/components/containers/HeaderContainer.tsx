@@ -4,7 +4,7 @@ interface IHeaderWrapper {
 
 const HeaderContainer = ({ children }: IHeaderWrapper) => {
   return (
-    <div className="w-full h-25 flex justify-center items-center md:gap-[22.188rem]">
+    <div className="p-4 flex justify-center items-center md:gap-[12.5rem]">
       {children}
     </div>
   );
