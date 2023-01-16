@@ -7,7 +7,7 @@ interface ISearchBarProps {
 }
 
 const SearchBar = ({ setCityName }: ISearchBarProps) => {
-  const [inputText, setInputText] = useState<string>('');
+  // const [inputText, setInputText] = useState<string>('');
   const [searchText, setSearchText] = useState<string>('');
   const [cityList, setCityList] = useState<{ id: number; name: string }[]>([]);
 
@@ -15,7 +15,7 @@ const SearchBar = ({ setCityName }: ISearchBarProps) => {
 
   return (
     <>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center">
         <input
           className="w-[37.5rem] px-5 py-4 rounded-2xl text-base outline-none"
           type="text"

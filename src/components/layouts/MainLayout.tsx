@@ -1,5 +1,7 @@
 import { Inter } from '@next/font/google';
 
+import MainWrapper from '../containers/MainWrapper';
+
 interface IMainLayoutProps {
   children: React.ReactNode;
 }
@@ -12,9 +14,9 @@ const inter = Inter({
 const MainLayout = ({ children }: IMainLayoutProps) => {
   return (
     <div
-      className={`w-full h-full relative flex flex-col justify-center items-center ${inter.variable} font-sans bg-red-300`}
+      className={`w-full h-full relative flex flex-col justify-center items-center ${inter.variable} font-sans bg-gray-700`}
     >
-      {children}
+      <MainWrapper>{children}</MainWrapper>
     </div>
   );
 };
