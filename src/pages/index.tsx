@@ -21,7 +21,7 @@ const App = () => {
   return (
     <>
       <HeaderContainer>
-        <h1 className="text-4xl font-bold">Weather App</h1>
+        <h1 className="text-base font-bold">Weather App</h1>
         <div className="relative">
           <SearchBar setCityName={setCityName} />
         </div>
@@ -29,125 +29,131 @@ const App = () => {
       <CardContainer>
         {/* First Card */}
         <Card>
-          <div className="flex gap-2">
-            <h1 className="font-bold text-xl">{weatherData?.location.name}</h1>
-            <h1 className="text-xl">
+          <div className="flex gap-1">
+            <h1 className="font-bold text-base">
+              {weatherData?.location.name}
+            </h1>
+            <h1 className="text-base">
               {weatherData?.forecast.forecastday[0].date}
             </h1>
           </div>
-          <Image src={cloudy} alt="Image of a Cloud" width={240} height={160} />
-          <h1 className="text-4xl font-bold">
+          <Image src={cloudy} alt="Image of a Cloud" width={187} height={124} />
+          <h1 className="text-2xl font-bold">
             {weatherData?.current.condition.text}
           </h1>
-          <p className="font-medium text-xl">
+          <p className="font-medium text-base">
             {weatherData?.forecast.forecastday[0].day.daily_chance_of_rain}%
             Chance of rain
           </p>
           <div className="flex gap-4">
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-base font-bold">
               {weatherData?.current.temp_c}°C
             </h1>
             <Image
               src={thermo}
               alt="svg of thermostat"
-              width={15}
-              height={30}
+              width={10}
+              height={20}
             />
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-base font-bold">
               {weatherData?.current.humidity}%
             </h1>
             <Image
               src={droplet}
               alt="svg of waterdrop"
-              width={21}
-              height={30}
+              width={14.35}
+              height={20}
             />
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-base font-bold">
               {weatherData?.current.wind_kph} KPH
             </h1>
-            <Image src={wind} alt="svg of wind" width={41} height={30} />
+            <Image src={wind} alt="svg of wind" width={27.65} height={20} />
           </div>
         </Card>
         {/* Second Card */}
         <Card>
-          <div className="flex gap-2">
-            <h1 className="font-bold text-xl">{weatherData?.location.name}</h1>
-            <h1 className="text-xl">
+          <div className="flex gap-1">
+            <h1 className="font-bold text-base">
+              {weatherData?.location.name}
+            </h1>
+            <h1 className="text-base">
               {weatherData?.forecast.forecastday[0].date}
             </h1>
           </div>
-          <Image src={cloudy} alt="Image of a Cloud" width={240} height={160} />
-          <h1 className="text-4xl font-bold">
+          <Image src={cloudy} alt="Image of a Cloud" width={187} height={124} />
+          <h1 className="text-2xl font-bold">
             {weatherData?.current.condition.text}
           </h1>
-          <p className="font-medium text-xl">
+          <p className="font-medium text-base">
             {weatherData?.forecast.forecastday[0].day.daily_chance_of_rain}%
             Chance of rain
           </p>
           <div className="flex gap-4">
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-base font-bold">
               {weatherData?.current.temp_c}°C
             </h1>
             <Image
               src={thermo}
               alt="svg of thermostat"
-              width={15}
-              height={30}
+              width={10}
+              height={20}
             />
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-base font-bold">
               {weatherData?.current.humidity}%
             </h1>
             <Image
               src={droplet}
               alt="svg of waterdrop"
-              width={21}
-              height={30}
+              width={14.35}
+              height={20}
             />
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-base font-bold">
               {weatherData?.current.wind_kph} KPH
             </h1>
-            <Image src={wind} alt="svg of wind" width={41} height={30} />
+            <Image src={wind} alt="svg of wind" width={27.65} height={20} />
           </div>
         </Card>
         {/* Third Card */}
         <Card>
-          <div className="flex gap-2">
-            <h1 className="font-bold text-xl">{weatherData?.location.name}</h1>
-            <h1 className="text-xl">
+          <div className="flex gap-1">
+            <h1 className="font-bold text-base">
+              {weatherData?.location.name}
+            </h1>
+            <h1 className="text-base">
               {weatherData?.forecast.forecastday[0].date}
             </h1>
           </div>
-          <Image src={cloudy} alt="Image of a Cloud" width={240} height={160} />
-          <h1 className="text-4xl font-bold">
+          <Image src={cloudy} alt="Image of a Cloud" width={187} height={124} />
+          <h1 className="text-2xl font-bold">
             {weatherData?.current.condition.text}
           </h1>
-          <p className="font-medium text-xl">
+          <p className="font-medium text-base">
             {weatherData?.forecast.forecastday[0].day.daily_chance_of_rain}%
             Chance of rain
           </p>
           <div className="flex gap-4">
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-base font-bold">
               {weatherData?.current.temp_c}°C
             </h1>
             <Image
               src={thermo}
               alt="svg of thermostat"
-              width={15}
-              height={30}
+              width={10}
+              height={20}
             />
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-base font-bold">
               {weatherData?.current.humidity}%
             </h1>
             <Image
               src={droplet}
               alt="svg of waterdrop"
-              width={21}
-              height={30}
+              width={14.35}
+              height={20}
             />
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-base font-bold">
               {weatherData?.current.wind_kph} KPH
             </h1>
-            <Image src={wind} alt="svg of wind" width={41} height={30} />
+            <Image src={wind} alt="svg of wind" width={27.65} height={20} />
           </div>
         </Card>
       </CardContainer>

@@ -17,21 +17,12 @@ const SearchBar = ({ setCityName }: ISearchBarProps) => {
     <>
       <div className="flex items-center">
         <input
-          className="w-[37.5rem] px-5 py-4 rounded-2xl text-base outline-none"
+          className="w-[31.25rem] px-[1.375rem] py-2 rounded-2xl text-base outline-none"
           type="text"
           placeholder="Search City ..."
           onChange={(e) => setSearchText(e.target.value)}
           onBlur={() => setSearchText('')}
         />
-        {/* <button
-          className="bg-white hover:bg-gray-300 duration-100 rounded-2xl px-5 py-4"
-          onClick={() => setSearchText(inputText)}
-          onBlur={() => {
-            setCityList([]);
-          }}
-        >
-          <i className="fa-solid fa-magnifying-glass-location fa-xl"></i>
-        </button> */}
       </div>
       <div
         className={`${

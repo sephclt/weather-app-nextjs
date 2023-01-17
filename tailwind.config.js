@@ -6,8 +6,7 @@ module.exports = {
   theme: {
     extend: {
       maxWidth: {
-        wrapper: '1381px',
-        card: '502.99px',
+        wrapper: '1280px',
       },
       fontFamily: {
         sans: ['var(--font-inter)', ...fontFamily.sans],
