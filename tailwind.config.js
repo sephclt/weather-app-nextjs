@@ -14,6 +14,10 @@ module.exports = {
       screens: {
         sm: '360px',
       },
+      backgroundColor: {
+        darkBg: 'rgb(0, 32, 41)',
+        darkFg: 'rgb(0, 96, 122)',
+      },
     },
   },
   plugins: [],

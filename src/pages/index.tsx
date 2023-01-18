@@ -21,22 +21,22 @@ const App = () => {
   return (
     <>
       <HeaderContainer>
-        <h1 className="text-base font-bold">Weather App</h1>
+        <h1 className="text-base font-bold text-white">Weather App</h1>
         <div className="relative">
           <SearchBar setCityName={setCityName} />
         </div>
       </HeaderContainer>
+      <div>
+        <h1 className="font-bold text-xl text-white">
+          {weatherData?.location.name}
+        </h1>
+      </div>
       <CardContainer>
         {/* First Card */}
         <Card>
-          <div className="flex gap-1">
-            <h1 className="font-bold text-base">
-              {weatherData?.location.name}
-            </h1>
-            <h1 className="text-base">
-              {weatherData?.forecast.forecastday[0].date}
-            </h1>
-          </div>
+          <h1 className="text-base">
+            {weatherData?.forecast.forecastday[0].date}
+          </h1>
           <Image src={cloudy} alt="Image of a Cloud" width={187} height={124} />
           <h1 className="text-2xl font-bold">
             {weatherData?.current.condition.text}
@@ -152,7 +152,7 @@ const App = () => {
         </Card>
       </CardContainer>
       <CardContainer>
-        <div className="w-full px-4 py-4 grid grid-cols-2 gap-2 border border-blue-500">
+        <div className="w-full px-4 py-4 grid grid-cols-2 gap-2 bg-darkBg/40 rounded-xl">
           <div className="flex flex-col gap-2">
             <h1 className="font-bold text-xl">Air Quality</h1>
             <p className="text-base">
