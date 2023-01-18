@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import cloudy from '../../public/Weather_Icons/cloudy.png';
 import droplet from '../../public/Weather_Icons/droplet.png';
 import thermo from '../../public/Weather_Icons/thermo.png';
 import wind from '../../public/Weather_Icons/wind.png';
@@ -11,12 +10,26 @@ import Card from '../components/ui/Card';
 import SearchBar from '../components/ui/SearchBar';
 
 import Image from 'next/image';
-import useDataFetch from '../hooks/useDataFetch';
+import useDataFetch, { IWeatherData } from '../hooks/useDataFetch';
+import useImageFetch from '../hooks/useImageFetch';
 
-const App = () => {
+const getStaticProps = async () => {
+  const res = await fetch(
+    'https://api.weatherapi.com/v1/forecast.json?key=21465421a71e4be6a60131002222712&q=manila&days=3&aqi=yes&alerts=yes'
+  );
+  const currentData = await res.json();
+
+  return {
+    props: { currentData },
+  };
+};
+
+const App = (currentData: IWeatherData | null) => {
   const [cityName, setCityName] = useState<string>('manila');
 
   const weatherData = useDataFetch(cityName);
+
+  const imageOutput = useImageFetch(weatherData);
 
   return (
     <>
@@ -37,7 +50,17 @@ const App = () => {
           <h1 className="text-base">
             {weatherData?.forecast.forecastday[0].date}
           </h1>
-          <Image src={cloudy} alt="Image of a Cloud" width={187} height={124} />
+          <Image
+            src={
+              weatherData
+                ? 'https:' +
+                  weatherData!.forecast.forecastday[0].day.condition.icon
+                : imageOutput.iconUrl
+            }
+            alt="Image of a Cloud"
+            width={120}
+            height={120}
+          />
           <h1 className="text-2xl font-bold">
             {weatherData?.current.condition.text}
           </h1>
@@ -77,7 +100,17 @@ const App = () => {
               {weatherData?.forecast.forecastday[1].date}
             </h1>
           </div>
-          <Image src={cloudy} alt="Image of a Cloud" width={187} height={124} />
+          <Image
+            src={
+              weatherData
+                ? 'https:' +
+                  weatherData!.forecast.forecastday[1].day.condition.icon
+                : imageOutput.iconUrl
+            }
+            alt="Image of a Cloud"
+            width={120}
+            height={120}
+          />
           <h1 className="text-2xl font-bold">
             {weatherData?.forecast.forecastday[1].day.condition.text}
           </h1>
@@ -117,7 +150,17 @@ const App = () => {
               {weatherData?.forecast.forecastday[2].date}
             </h1>
           </div>
-          <Image src={cloudy} alt="Image of a Cloud" width={187} height={124} />
+          <Image
+            src={
+              weatherData
+                ? 'https:' +
+                  weatherData!.forecast.forecastday[2].day.condition.icon
+                : imageOutput.iconUrl
+            }
+            alt="Image of a Cloud"
+            width={120}
+            height={120}
+          />
           <h1 className="text-2xl font-bold">
             {weatherData?.forecast.forecastday[2].day.condition.text}
           </h1>

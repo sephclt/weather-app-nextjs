@@ -29,6 +29,7 @@ export interface IWeatherData {
         maxwind_kph: number;
         condition: {
           text: string;
+          icon: string;
         };
       };
     }[];
