@@ -12,12 +12,21 @@ export interface IWeatherData {
     condition: {
       text: string;
     };
+    air_quality: {
+      co: number;
+      no2: number;
+      o3: number;
+      so2: number;
+    };
   };
   forecast: {
     forecastday: {
       date: string;
       day: {
         daily_chance_of_rain: number;
+        avgtemp_c: number;
+        avghumidity: number;
+        maxwind_kph: number;
         condition: {
           text: string;
         };
