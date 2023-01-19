@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import droplet from '../../public/Weather_Icons/droplet.png';
-import thermo from '../../public/Weather_Icons/thermo.png';
-import wind from '../../public/Weather_Icons/wind.png';
+import droplet from '/public/Weather_Icons/droplet.png';
+import thermo from '/public/Weather_Icons/thermo.png';
+import wind from '/public/Weather_Icons/wind.png';
 
 import CardContainer from '../components/containers/CardContainer';
 import HeaderContainer from '../components/containers/HeaderContainer';
@@ -20,8 +20,6 @@ const App = () => {
   const weatherData = useDataFetch(cityName);
 
   const imageOutput = useImageFetch(weatherData);
-
-  console.log(imageOutput.imageUrl);
 
   return (
     <MainLayout imageOutput={imageOutput}>
