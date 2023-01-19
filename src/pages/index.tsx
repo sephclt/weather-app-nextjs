@@ -6,6 +6,7 @@ import wind from '../../public/Weather_Icons/wind.png';
 
 import CardContainer from '../components/containers/CardContainer';
 import HeaderContainer from '../components/containers/HeaderContainer';
+import MainLayout from '../components/layouts/MainLayout';
 import Card from '../components/ui/Card';
 import SearchBar from '../components/ui/SearchBar';
 
@@ -31,10 +32,8 @@ const App = (currentData: IWeatherData | null) => {
 
   const imageOutput = useImageFetch(weatherData);
 
-  console.log(imageOutput);
-
   return (
-    <>
+    <MainLayout>
       <HeaderContainer>
         <h1 className="text-base font-bold text-white">Weather App</h1>
         <div className="relative">
@@ -223,7 +222,7 @@ const App = (currentData: IWeatherData | null) => {
           </div>
         </div>
       </CardContainer>
-    </>
+    </MainLayout>
   );
 };
 
