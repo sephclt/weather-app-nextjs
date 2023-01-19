@@ -9,9 +9,7 @@ import sunny from '../../public/Images/sunny.jpg';
 
 // --- Weather Icons ---
 import cloudico from '../../public/Weather_Icons/cloud.png';
-import cloudyico from '../../public/Weather_Icons/cloudy.png';
 import heavyrainico from '../../public/Weather_Icons/heavyrain.png';
-import lightrainico from '../../public/Weather_Icons/lightrain.png';
 import sunnyico from '../../public/Weather_Icons/sunny.png';
 import stormico from '../../public/Weather_Icons/thunder.png';
 
@@ -23,19 +21,15 @@ interface IImageState {
 
 // type ActionList = | { condition: 'Cloudy' } | { condition: 'Partially Cloudy'} | { condition: 'Light Rain'} | { condition: 'Heavy Rain'}
 
-type ActionList = { condition?: string };
+type ActionList = { condition: string };
 
 const imageReducer = (state: typeof initialState, action: ActionList) => {
   switch (action.condition) {
-    case 'Cloudy':
+    case 'cloud':
       return { imageUrl: cloudy, iconUrl: cloudico };
-    case 'Partly cloudy':
-      return { imageUrl: cloudy, iconUrl: cloudyico };
-    case 'Light Rain':
-      return { imageUrl: rain, iconUrl: lightrainico };
-    case 'Heavy Rain':
+    case 'rain':
       return { imageUrl: rain, iconUrl: heavyrainico };
-    case 'Storm':
+    case 'heavy':
       return { imageUrl: storm, iconUrl: stormico };
     default:
       return { imageUrl: sunny, iconUrl: sunnyico };
@@ -46,7 +40,14 @@ const useImageFetch = (weatherData: IWeatherData | null) => {
   const [imageOutput, dispatch] = useReducer(imageReducer, initialState);
 
   const imageSelect = () => {
-    dispatch({ condition: weatherData?.current.condition.text });
+    const weatherTypes = ['rain', 'sunny', 'cloud', 'heavy'];
+    for (const type in weatherTypes) {
+      if (
+        weatherData?.forecast.forecastday[0].day.condition.text.includes(type)
+      ) {
+        dispatch({ condition: type });
+      }
+    }
   };
 
   const handleImageSelect = useCallback(imageSelect, [weatherData]);

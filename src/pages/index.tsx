@@ -31,6 +31,8 @@ const App = (currentData: IWeatherData | null) => {
 
   const imageOutput = useImageFetch(weatherData);
 
+  console.log(imageOutput);
+
   return (
     <>
       <HeaderContainer>
