@@ -36,7 +36,11 @@ const useImageFetch = (weatherData: IWeatherData | null) => {
   const imageSelect = () => {
     const weatherTypes = ['rain', 'sunny', 'cloud', 'heavy'];
     for (const type of weatherTypes) {
-      if (weatherData?.current.condition.text.toLowerCase().includes(type)) {
+      if (
+        weatherData?.forecast.forecastday[0].day.condition.text
+          .toLowerCase()
+          .includes(type)
+      ) {
         dispatch({ condition: type });
       }
     }

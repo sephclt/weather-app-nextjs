@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import droplet from '/public/Weather_Icons/droplet.png';
-import sunny from '/public/Weather_Icons/sunny.png';
 import thermo from '/public/Weather_Icons/thermo.png';
 import wind from '/public/Weather_Icons/wind.png';
 
@@ -40,6 +39,7 @@ const App = ({ placeHolderData }: IPlaceHolderData) => {
   const outputData = cityName ? weatherData : placeHolderData;
   const imageOutput = useImageFetch(outputData);
 
+  console.log(imageOutput);
   return (
     <MainLayout imageOutput={imageOutput}>
       <HeaderContainer>
@@ -64,7 +64,7 @@ const App = ({ placeHolderData }: IPlaceHolderData) => {
               outputData
                 ? 'https:' +
                   outputData?.forecast.forecastday[0].day.condition.icon
-                : sunny
+                : imageOutput.iconUrl
             }
             alt="Image of a Cloud"
             width={120}
