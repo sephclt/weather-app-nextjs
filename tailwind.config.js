@@ -19,10 +19,13 @@ module.exports = {
         darkFg: 'rgb(0, 96, 122)',
       },
       backgroundImage: {
-        sunny: 'url(/Images/sunny.jpg)',
-        cloudy: 'url(/Images/cloudy.jpg)',
-        rain: 'url(/Images/rain.jpg)',
-        storm: 'url(/Images/storm.jpg)',
+        sunny:
+          'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/Images/sunny.jpg)',
+        cloudy:
+          'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/Images/cloudy.jpg)',
+        rain: 'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/Images/rain.jpg)',
+        storm:
+          'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/Images/storm.jpg)',
       },
     },
   },

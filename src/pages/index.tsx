@@ -11,29 +11,20 @@ import Card from '../components/ui/Card';
 import SearchBar from '../components/ui/SearchBar';
 
 import Image from 'next/image';
-import useDataFetch, { IWeatherData } from '../hooks/useDataFetch';
+import useDataFetch from '../hooks/useDataFetch';
 import useImageFetch from '../hooks/useImageFetch';
 
-const getStaticProps = async () => {
-  const res = await fetch(
-    'https://api.weatherapi.com/v1/forecast.json?key=21465421a71e4be6a60131002222712&q=manila&days=3&aqi=yes&alerts=yes'
-  );
-  const currentData = await res.json();
-
-  return {
-    props: { currentData },
-  };
-};
-
-const App = (currentData: IWeatherData | null) => {
+const App = () => {
   const [cityName, setCityName] = useState<string>('manila');
 
   const weatherData = useDataFetch(cityName);
 
   const imageOutput = useImageFetch(weatherData);
 
+  console.log(imageOutput.imageUrl);
+
   return (
-    <MainLayout>
+    <MainLayout imageOutput={imageOutput}>
       <HeaderContainer>
         <h1 className="text-base font-bold text-white">Weather App</h1>
         <div className="relative">
