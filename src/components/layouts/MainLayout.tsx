@@ -14,7 +14,7 @@ const inter = Inter({
 const MainLayout = ({ children }: IMainLayoutProps) => {
   return (
     <div
-      className={`w-full h-full relative flex flex-col justify-center items-center ${inter.variable} font-sans bg-gray-700`}
+      className={`w-full h-full relative flex flex-col justify-center items-center ${inter.variable} font-sans bg-storm bg-cover bg-center duration-150`}
     >
       <MainWrapper>{children}</MainWrapper>
     </div>
