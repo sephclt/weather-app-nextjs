@@ -20,6 +20,7 @@ const ResultsPanel = ({
     <>
       {cityList.map((city) => (
         <button
+          className="w-full flex items-center p-2 border-b border-b-gray-300 hover:bg-gray-300"
           key={city.id}
           onClick={() => {
             setCityName(city.name), setCityList([]);

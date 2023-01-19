@@ -27,7 +27,7 @@ const SearchBar = ({ setCityName }: ISearchBarProps) => {
       <div
         className={`${
           cityList ? '' : 'hidden'
-        } absolute top-[57px] left-0 right-0 bg-white flex flex-col justify-center items-center`}
+        } absolute top-[32px] left-0 right-0 bg-white flex flex-col justify-center items-start`}
       >
         <ResultsPanel
           cityList={cityList}
