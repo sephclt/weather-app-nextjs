@@ -11,6 +11,7 @@ export interface IWeatherData {
     wind_kph: number;
     condition: {
       text: string;
+      icon: string;
     };
     air_quality: {
       co: number;
@@ -40,11 +41,13 @@ const useDataFetch = (cityName: string) => {
   const [weatherData, setWeatherData] = useState<IWeatherData | null>(null);
 
   const fetchData = async () => {
-    const res = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=21465421a71e4be6a60131002222712&q=${cityName}&days=3&aqi=yes&alerts=yes`
-    );
-    const data = await res.json();
-    setWeatherData(data);
+    if (cityName) {
+      const res = await fetch(
+        `https://api.weatherapi.com/v1/forecast.json?key=21465421a71e4be6a60131002222712&q=${cityName}&days=3&aqi=yes&alerts=yes`
+      );
+      const data = await res.json();
+      setWeatherData(data);
+    }
   };
 
   const handleFetchData = useCallback(fetchData, [cityName]);
