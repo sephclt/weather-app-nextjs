@@ -35,6 +35,15 @@ export interface IWeatherData {
       };
     }[];
   };
+  alerts: {
+    alert: {
+      headline: string;
+      event: string;
+      severity: string;
+      urgency: string;
+      areas: string;
+    }[];
+  };
 }
 
 const useDataFetch = (cityName: string) => {
