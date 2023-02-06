@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { ModalContext } from '../../contexts/ModalContext';
 import useSearch from '../../hooks/useSearch';
 import ResultsPanel from './ResultsPanel';
 
@@ -10,6 +11,7 @@ const SearchBar = ({ setCityName }: ISearchBarProps) => {
   // const [inputText, setInputText] = useState<string>('');
   const [searchText, setSearchText] = useState<string>('');
   const [cityList, setCityList] = useState<{ id: number; name: string }[]>([]);
+  const { setModalToggle } = useContext(ModalContext);
 
   useSearch({ searchText, setCityList });
 
@@ -19,7 +21,7 @@ const SearchBar = ({ setCityName }: ISearchBarProps) => {
         <input
           className="w-[31.25rem] px-[1.375rem] py-2 rounded-2xl text-base outline-none"
           type="text"
-          placeholder="Search City ..."
+          placeholder="Search City"
           onChange={(e) => setSearchText(e.target.value)}
           onBlur={() => setSearchText('')}
         />

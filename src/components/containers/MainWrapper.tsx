@@ -4,7 +4,7 @@ interface IMainWrapperProps {
 
 const MainWrapper = ({ children }: IMainWrapperProps) => {
   return (
-    <div className="max-w-wrapper h-auto flex flex-col justify-center items-center gap-3">
+    <div className="max-w-wrapper h-full flex flex-col justify-start items-center gap-3">
       {children}
     </div>
   );

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import droplet from '/public/Weather_Icons/droplet.png';
 import thermo from '/public/Weather_Icons/thermo.png';
@@ -12,6 +12,8 @@ import SearchBar from '../components/ui/SearchBar';
 
 import { GetStaticProps } from 'next';
 import Image from 'next/image';
+import SearchModal from '../components/ui/SearchModal';
+import { ModalContext } from '../contexts/ModalContext';
 import useDataFetch, { IWeatherData } from '../hooks/useDataFetch';
 import useImageFetch from '../hooks/useImageFetch';
 
@@ -34,19 +36,25 @@ export const getStaticProps: GetStaticProps<{
 
 const App = ({ placeHolderData }: IPlaceHolderData) => {
   const [cityName, setCityName] = useState<string>('');
+  const { setModalToggle } = useContext(ModalContext);
 
   const weatherData = useDataFetch(cityName);
   const outputData = cityName ? weatherData : placeHolderData;
   const imageOutput = useImageFetch(outputData);
 
-  console.log(imageOutput);
   return (
     <MainLayout imageOutput={imageOutput}>
       <HeaderContainer>
         <h1 className="text-base font-bold text-white">Weather App</h1>
-        <div className="relative">
+        <div className="relative xl:inline sm:hidden">
           <SearchBar setCityName={setCityName} />
         </div>
+        <div className="flex items-center text-white xl:hidden sm:inline">
+          <button onClick={() => setModalToggle(true)}>
+            <i className="fa-solid fa-magnifying-glass fa-lg"></i>
+          </button>
+        </div>
+        <SearchModal setCityName={setCityName} />
       </HeaderContainer>
       <div>
         <h1 className="font-bold text-xl text-white">
